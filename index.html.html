@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nidamanuri Venkatesh — Web Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fafaf8;
+    --surface:#ffffff;
+    --text:#171717;
+    --muted:#6b6b6b;
+    --border:#e9e7e2;
+    --accent:#0f6b5c;
+    --accent-soft:#e4f0ed;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  ::selection{background:var(--accent-soft); color:var(--accent);}
+
+  .wrap{max-width:720px; margin:0 auto; padding:88px 24px 100px;}
+
+  /* ===== HERO ===== */
+  header{margin-bottom:80px;}
+  .kicker{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--accent);
+    letter-spacing:.06em; text-transform:uppercase; margin-bottom:18px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .kicker::before{content:''; width:6px; height:6px; background:var(--accent); border-radius:50%; display:inline-block;}
+  header h1{
+    font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:-0.02em;
+    font-size:clamp(34px, 5.5vw, 48px); line-height:1.08; margin-bottom:16px;
+  }
+  header p.tagline{color:var(--muted); font-size:17px; max-width:520px; margin-bottom:28px;}
+  .links{display:flex; gap:12px;}
+  .links a{
+    font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--text);
+    padding:9px 16px; border:1px solid var(--border); border-radius:8px;
+    transition:border-color .15s ease, color .15s ease, transform .15s ease;
+  }
+  .links a:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-1px);}
+
+  /* ===== SECTIONS ===== */
+  section{margin-bottom:64px;}
+  .section-head{
+    display:flex; align-items:baseline; gap:10px; margin-bottom:28px;
+  }
+  .section-head .idx{font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--muted);}
+  .section-head h2{
+    font-family:'Space Grotesk', sans-serif; font-size:15px; font-weight:600;
+    text-transform:uppercase; letter-spacing:.08em; color:var(--text);
+  }
+
+  .about p{font-size:16px; color:#3a3a3a; max-width:600px;}
+
+  /* ===== PROJECTS ===== */
+  .project{
+    background:var(--surface); border:1px solid var(--border); border-radius:14px;
+    padding:26px 28px; margin-bottom:14px;
+    transition:box-shadow .18s ease, transform .18s ease, border-color .18s ease;
+  }
+  .project:hover{
+    box-shadow:0 6px 24px rgba(15,107,92,0.08); transform:translateY(-2px); border-color:#d7e5e1;
+  }
+  .project-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:10px;}
+  .project h3{font-family:'Space Grotesk', sans-serif; font-size:18px; font-weight:600;}
+  .project .stack{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--accent);
+    background:var(--accent-soft); padding:4px 10px; border-radius:6px; white-space:nowrap;
+  }
+  .project p{font-size:14.5px; color:#4a4a4a; margin-bottom:14px;}
+  .project .links a{
+    font-size:12.5px; padding:6px 12px; border-radius:6px;
+  }
+
+  /* ===== SKILLS ===== */
+  .skills ul{list-style:none; display:flex; flex-wrap:wrap; gap:9px;}
+  .skills li{
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; color:#3a3a3a;
+    padding:7px 14px; background:var(--surface); border:1px solid var(--border); border-radius:20px;
+  }
+
+  footer{
+    padding-top:40px; border-top:1px solid var(--border);
+    font-size:14px; color:var(--muted);
+  }
+
+  @media(max-width:480px){
+    .wrap{padding:64px 20px 80px;}
+    .links{flex-wrap:wrap;}
+    .project-top{flex-direction:column; gap:8px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="kicker">Available for opportunities</div>
+    <h1>Nidamanuri Venkatesh</h1>
+    <p class="tagline">Web developer building full-stack applications — REST APIs with authentication, React interfaces, and the databases that hold it all together.</p>
+    <div class="links">
+      <a href="https://github.com/nv24ceb0a40-lgtm" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/nidamanuri-venkatesh-5b5a903b7" target="_blank">LinkedIn</a>
+    </div>
+  </header>
+
+  <section class="about">
+    <div class="section-head"><span class="idx">01</span><h2>About</h2></div>
+    <p>I work across the stack — Node and Express on the backend, React and Tailwind on the front, MongoDB underneath. I like projects that force me to think about both sides at once: how the data is shaped, and how it actually gets used.</p>
+  </section>
+
+  <section class="projects">
+    <div class="section-head"><span class="idx">02</span><h2>Projects</h2></div>
+
+    <div class="project">
+      <div class="project-top">
+        <h3>Task Manager API</h3>
+        <div class="stack">Node · Express · JWT</div>
+      </div>
+      <p>A REST API with JWT-based authentication and bcrypt password hashing, supporting full CRUD on tasks. Tested end-to-end with Postman.</p>
+      <div class="links"><a href="https://github.com/nv24ceb0a40-lgtm" target="_blank">View code</a></div>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <h3>Notes API + Frontend</h3>
+        <div class="stack">Express · MongoDB Atlas · React</div>
+      </div>
+      <p>A full-stack notes app — an Express and MongoDB Atlas backend paired with a React frontend for creating, editing, and organizing notes.</p>
+      <div class="links"><a href="https://github.com/nv24ceb0a40-lgtm" target="_blank">View code</a></div>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <h3>AI Chatbot</h3>
+        <div class="stack">Groq API · LLaMA</div>
+      </div>
+      <p>A conversational chatbot built on Groq's LLaMA inference API, focused on fast, low-latency responses.</p>
+      <div class="links"><a href="https://github.com/nv24ceb0a40-lgtm/chat-bot-project" target="_blank">View code</a></div>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <h3>JS Mini-Projects</h3>
+        <div class="stack">HTML · CSS · JavaScript</div>
+      </div>
+      <p>Ten small front-end builds — Counter, Dice Roller, Calculator, Pokedex, and more — each exploring a different core JavaScript pattern.</p>
+      <div class="links"><a href="https://github.com/nv24ceb0a40-lgtm" target="_blank">View code</a></div>
+    </div>
+
+  </section>
+
+  <section class="skills">
+    <div class="section-head"><span class="idx">03</span><h2>Skills</h2></div>
+    <ul>
+      <li>JavaScript</li>
+      <li>React</li>
+      <li>Node.js</li>
+      <li>Express</li>
+      <li>MongoDB</li>
+      <li>Tailwind CSS</li>
+      <li>SQL</li>
+      <li>C++ / DSA</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Let's connect — reach out via GitHub or LinkedIn above.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
