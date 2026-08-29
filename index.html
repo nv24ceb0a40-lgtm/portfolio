@@ -5,16 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nidamanuri Venkatesh — Web Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#fafaf8;
-    --surface:#ffffff;
-    --text:#171717;
-    --muted:#6b6b6b;
-    --border:#e9e7e2;
-    --accent:#0f6b5c;
-    --accent-soft:#e4f0ed;
+    --bg:#0c0e11;
+    --surface:rgba(255,255,255,0.04);
+    --border:rgba(255,255,255,0.09);
+    --text:#e9ebef;
+    --muted:#888e99;
+    --teal:#4f9d8e;
+    --green:#729e63;
+    --lime:#9bb356;
+    --grad:linear-gradient(100deg,var(--teal),var(--green) 55%,var(--lime));
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -24,147 +26,245 @@
     background:var(--bg);
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
   a{color:inherit; text-decoration:none;}
-  ::selection{background:var(--accent-soft); color:var(--accent);}
+  ::selection{background:rgba(114,158,99,0.3); color:#fff;}
 
-  .wrap{max-width:720px; margin:0 auto; padding:88px 24px 100px;}
+  body::before{
+    content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size:46px 46px;
+    mask-image:radial-gradient(ellipse 75% 55% at 50% 25%, black 35%, transparent 100%);
+  }
+
+  section{position:relative; z-index:1; padding:100px 24px;}
+  .inner{max-width:840px; margin:0 auto;}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.visible{opacity:1; transform:translateY(0);}
 
   /* ===== HERO ===== */
-  header{margin-bottom:80px;}
+  .hero{
+    min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+    padding-top:60px; padding-bottom:60px;
+  }
+  .avatar-ring{
+    width:92px; height:92px; border-radius:50%; padding:2px; margin-bottom:28px;
+    background:var(--grad);
+  }
+  .avatar-ring img{display:block; width:100%; height:100%; border-radius:50%; border:3px solid var(--bg); object-fit:cover;}
+  .avatar-fallback{
+    display:none; width:100%; height:100%; border-radius:50%; border:3px solid var(--bg);
+    background:#12151a; color:var(--lime); align-items:center; justify-content:center;
+    font-family:'Sora',sans-serif; font-weight:700; font-size:26px;
+  }
+
   .kicker{
-    font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--accent);
-    letter-spacing:.06em; text-transform:uppercase; margin-bottom:18px;
-    display:flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--muted);
+    letter-spacing:.08em; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:8px;
   }
-  .kicker::before{content:''; width:6px; height:6px; background:var(--accent); border-radius:50%; display:inline-block;}
-  header h1{
-    font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:-0.02em;
-    font-size:clamp(34px, 5.5vw, 48px); line-height:1.08; margin-bottom:16px;
+  .kicker::before{content:''; width:6px; height:6px; background:var(--green); border-radius:50%;}
+
+  .hero h1{
+    font-family:'Sora', sans-serif; font-weight:800; letter-spacing:-0.02em;
+    font-size:clamp(40px, 7vw, 66px); line-height:1.04; margin-bottom:18px;
+    background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;
   }
-  header p.tagline{color:var(--muted); font-size:17px; max-width:520px; margin-bottom:28px;}
+  .hero .role{font-family:'Sora',sans-serif; font-size:clamp(17px,2vw,20px); font-weight:600; color:#cdd1d8; margin-bottom:20px;}
+  .hero .tagline{font-size:16px; color:var(--muted); max-width:560px; margin-bottom:36px;}
+
+  .stats{display:flex; gap:34px; flex-wrap:wrap; margin-bottom:36px;}
+  .stat .num{font-family:'Sora',sans-serif; font-size:26px; font-weight:700; color:var(--text);}
+  .stat .label{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-top:2px;}
+
   .links{display:flex; gap:12px;}
   .links a{
-    font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--text);
-    padding:9px 16px; border:1px solid var(--border); border-radius:8px;
-    transition:border-color .15s ease, color .15s ease, transform .15s ease;
+    font-family:'JetBrains Mono', monospace; font-size:13px; padding:10px 18px;
+    border:1px solid var(--border); border-radius:9px; background:var(--surface);
+    transition:border-color .18s ease, transform .18s ease;
   }
-  .links a:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-1px);}
+  .links a:hover{border-color:var(--green); transform:translateY(-2px);}
 
-  /* ===== SECTIONS ===== */
-  section{margin-bottom:64px;}
-  .section-head{
-    display:flex; align-items:baseline; gap:10px; margin-bottom:28px;
+  .scroll-hint{
+    position:absolute; bottom:36px; left:24px; font-family:'JetBrains Mono',monospace; font-size:11px;
+    color:var(--muted); display:flex; align-items:center; gap:8px; letter-spacing:.05em;
   }
-  .section-head .idx{font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--muted);}
+  .scroll-hint .line{width:1px; height:28px; background:linear-gradient(var(--green), transparent); animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:.3;} 50%{opacity:1;}}
+
+  /* ===== SECTION LABELS ===== */
+  .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:36px;}
+  .section-head .idx{font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--green);}
   .section-head h2{
-    font-family:'Space Grotesk', sans-serif; font-size:15px; font-weight:600;
-    text-transform:uppercase; letter-spacing:.08em; color:var(--text);
+    font-family:'Sora',sans-serif; font-size:15px; font-weight:700; text-transform:uppercase; letter-spacing:.1em;
   }
+  .section-head .rule{flex:1; height:1px; background:linear-gradient(90deg,var(--border),transparent);}
 
-  .about p{font-size:16px; color:#3a3a3a; max-width:600px;}
+  .about p{font-size:17px; color:#c3c7cf; max-width:600px;}
 
-  /* ===== PROJECTS ===== */
-  .project{
-    background:var(--surface); border:1px solid var(--border); border-radius:14px;
-    padding:26px 28px; margin-bottom:14px;
-    transition:box-shadow .18s ease, transform .18s ease, border-color .18s ease;
+  /* ===== PROJECTS — full width sections ===== */
+  .project-section{
+    min-height:70vh; display:flex; flex-direction:column; justify-content:center;
+    border-top:1px solid var(--border);
   }
-  .project:hover{
-    box-shadow:0 6px 24px rgba(15,107,92,0.08); transform:translateY(-2px); border-color:#d7e5e1;
+  .project-num{
+    font-family:'Sora',sans-serif; font-weight:800; font-size:clamp(46px,7vw,80px); line-height:1;
+    color:rgba(255,255,255,0.08); margin-bottom:8px;
   }
-  .project-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:10px;}
-  .project h3{font-family:'Space Grotesk', sans-serif; font-size:18px; font-weight:600;}
-  .project .stack{
-    font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--accent);
-    background:var(--accent-soft); padding:4px 10px; border-radius:6px; white-space:nowrap;
+  .project-section h3{font-family:'Sora',sans-serif; font-size:clamp(24px,3.4vw,32px); font-weight:700; margin-bottom:14px;}
+  .project-title-row{display:flex; align-items:center; gap:18px; margin-bottom:14px;}
+  .project-title-row h3{margin-bottom:0;}
+
+  .critter{width:44px; height:40px; animation:critter-bounce 1.1s ease-in-out infinite;}
+  .critter-body{
+    position:relative; width:38px; height:30px; margin:0 auto;
+    background:var(--lime); border-radius:50% 50% 45% 45%; border:2px solid #0c0e11;
   }
-  .project p{font-size:14.5px; color:#4a4a4a; margin-bottom:14px;}
-  .project .links a{
-    font-size:12.5px; padding:6px 12px; border-radius:6px;
+  .critter-ear{
+    position:absolute; top:-9px; width:11px; height:14px; background:var(--lime);
+    border:2px solid #0c0e11; border-radius:50% 50% 20% 20%;
   }
+  .critter-ear-l{left:1px; transform:rotate(-18deg);}
+  .critter-ear-r{right:1px; transform:rotate(18deg);}
+  .critter-eye{position:absolute; top:11px; width:4px; height:4px; background:#0c0e11; border-radius:50%;}
+  .critter-eye-l{left:9px;}
+  .critter-eye-r{right:9px;}
+  @keyframes critter-bounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-9px);}
+  }
+  .project-section .stack{
+    font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--lime);
+    border:1px solid rgba(155,179,86,0.35); background:rgba(155,179,86,0.07);
+    padding:5px 13px; border-radius:20px; display:inline-block; margin-bottom:18px;
+  }
+  .project-section p{font-size:16px; color:#a7abb3; max-width:600px; margin-bottom:22px;}
+  .project-section .links a{font-size:13px; padding:9px 16px;}
 
   /* ===== SKILLS ===== */
-  .skills ul{list-style:none; display:flex; flex-wrap:wrap; gap:9px;}
+  .skills ul{list-style:none; display:flex; flex-wrap:wrap; gap:10px;}
   .skills li{
-    font-family:'JetBrains Mono', monospace; font-size:12.5px; color:#3a3a3a;
-    padding:7px 14px; background:var(--surface); border:1px solid var(--border); border-radius:20px;
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--muted);
+    padding:9px 17px; background:var(--surface); border:1px solid var(--border); border-radius:22px;
+    transition:border-color .2s ease, color .2s ease;
   }
+  .skills li:hover{border-color:var(--green); color:var(--lime);}
 
   footer{
-    padding-top:40px; border-top:1px solid var(--border);
-    font-size:14px; color:var(--muted);
+    padding:60px 24px; border-top:1px solid var(--border);
+    font-size:13.5px; color:var(--muted); font-family:'JetBrains Mono',monospace; text-align:center;
   }
 
-  @media(max-width:480px){
-    .wrap{padding:64px 20px 80px;}
-    .links{flex-wrap:wrap;}
-    .project-top{flex-direction:column; gap:8px;}
+  @media(max-width:520px){
+    section{padding:70px 20px;}
+    .stats{gap:22px;}
+    .scroll-hint{display:none;}
   }
 </style>
 </head>
 <body>
 
-<div class="wrap">
-
-  <header>
+<section class="hero">
+  <div class="inner" style="width:100%; position:relative;">
+    <div class="avatar-ring">
+      <img id="avatarImg" src="https://github.com/nv24ceb0a40-lgtm.png?size=200" alt="Nidamanuri Venkatesh"
+           onerror="this.style.display='none'; document.getElementById('avatarFallback').style.display='flex';">
+      <div id="avatarFallback" class="avatar-fallback">NV</div>
+    </div>
     <div class="kicker">Available for opportunities</div>
-    <h1>Nidamanuri Venkatesh</h1>
-    <p class="tagline">Web developer building full-stack applications — REST APIs with authentication, React interfaces, and the databases that hold it all together.</p>
+    <h1>Nidamanuri<br>Venkatesh</h1>
+    <div class="role">Web Developer</div>
+    <p class="tagline">Building full-stack applications — REST APIs with authentication, React interfaces, and the databases that hold it all together.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="num">8.78</div><div class="label">CGPA</div></div>
+      <div class="stat"><div class="num">200+</div><div class="label">LeetCode Solved</div></div>
+      <div class="stat"><div class="num">NITW</div><div class="label">'24–'28</div></div>
+    </div>
+
     <div class="links">
       <a href="https://github.com/nv24ceb0a40-lgtm" target="_blank">GitHub</a>
       <a href="https://www.linkedin.com/in/nidamanuri-venkatesh-5b5a903b7" target="_blank">LinkedIn</a>
     </div>
-  </header>
+  </div>
+  <div class="scroll-hint"><div class="line"></div>SCROLL</div>
+</section>
 
-  <section class="about">
-    <div class="section-head"><span class="idx">01</span><h2>About</h2></div>
+<section class="about reveal">
+  <div class="inner">
+    <div class="section-head"><span class="idx">01</span><h2>About</h2><div class="rule"></div></div>
     <p>I work across the stack — Node and Express on the backend, React and Tailwind on the front, MongoDB underneath. I like projects that force me to think about both sides at once: how the data is shaped, and how it actually gets used.</p>
-  </section>
+  </div>
+</section>
 
-  <section class="projects">
-    <div class="section-head"><span class="idx">02</span><h2>Projects</h2></div>
+<section class="project-section reveal">
+  <div class="inner">
+    <div class="project-num">01</div>
+    <h3>Backend Projects</h3>
+    <div class="stack">Node · Express · JWT</div>
+    <p>A collection of backend builds covering REST APIs, JWT authentication, bcrypt password hashing, and full CRUD — including a Task Manager API tested end-to-end with Postman.</p>
+    <div class="links"><a href="https://github.com/nv24ceb0a40-lgtm/express-projects" target="_blank">View code</a></div>
+  </div>
+</section>
 
-    <div class="project">
-      <div class="project-top">
-        <h3>Task Manager API</h3>
-        <div class="stack">Node · Express · JWT</div>
-      </div>
-      <p>A REST API with JWT-based authentication and bcrypt password hashing, supporting full CRUD on tasks. Tested end-to-end with Postman.</p>
-      <div class="links"><a href="https://github.com/nv24ceb0a40-lgtm" target="_blank">View code</a></div>
+<section class="project-section reveal">
+  <div class="inner">
+    <div class="project-num">02</div>
+    <h3>Notes App</h3>
+    <div class="stack">Express · MongoDB Atlas · React</div>
+    <p>A full-stack notes app — an Express and MongoDB Atlas backend paired with a dedicated React frontend for creating, editing, and organizing notes.</p>
+    <div class="links">
+      <a href="https://github.com/nv24ceb0a40-lgtm/notes-api" target="_blank">Backend</a>
+      <a href="https://github.com/nv24ceb0a40-lgtm/notes-frontend" target="_blank">Frontend</a>
     </div>
+  </div>
+</section>
 
-    <div class="project">
-      <div class="project-top">
-        <h3>Notes API + Frontend</h3>
-        <div class="stack">Express · MongoDB Atlas · React</div>
+<section class="project-section reveal">
+  <div class="inner">
+    <div class="project-num">03</div>
+    <h3>AI Chatbot</h3>
+    <div class="stack">React · Vite · Groq API</div>
+    <p>A React chatbot built with Vite, running on Groq's LLaMA inference API — real-time message rendering, auto-scroll, and keyboard support.</p>
+    <div class="links"><a href="https://github.com/nv24ceb0a40-lgtm/chat-bot-project" target="_blank">View code</a></div>
+  </div>
+</section>
+
+<section class="project-section reveal">
+  <div class="inner">
+    <div class="project-num">04</div>
+    <div class="project-title-row">
+      <h3>Pokedex</h3>
+      <div class="critter" aria-hidden="true">
+        <div class="critter-body">
+          <div class="critter-ear critter-ear-l"></div>
+          <div class="critter-ear critter-ear-r"></div>
+          <div class="critter-eye critter-eye-l"></div>
+          <div class="critter-eye critter-eye-r"></div>
+        </div>
       </div>
-      <p>A full-stack notes app — an Express and MongoDB Atlas backend paired with a React frontend for creating, editing, and organizing notes.</p>
-      <div class="links"><a href="https://github.com/nv24ceb0a40-lgtm" target="_blank">View code</a></div>
     </div>
+    <div class="stack">HTML · CSS · JavaScript · PokéAPI</div>
+    <p>A searchable Pokedex fetching live data from PokéAPI — stats, types, and sprites rendered dynamically as you browse.</p>
+    <div class="links"><a href="https://github.com/nv24ceb0a40-lgtm/js-projects" target="_blank">View code</a></div>
+  </div>
+</section>
 
-    <div class="project">
-      <div class="project-top">
-        <h3>AI Chatbot</h3>
-        <div class="stack">Groq API · LLaMA</div>
-      </div>
-      <p>A conversational chatbot built on Groq's LLaMA inference API, focused on fast, low-latency responses.</p>
-      <div class="links"><a href="https://github.com/nv24ceb0a40-lgtm/chat-bot-project" target="_blank">View code</a></div>
-    </div>
+<section class="project-section reveal">
+  <div class="inner">
+    <div class="project-num">05</div>
+    <h3>JS Mini-Projects</h3>
+    <div class="stack">HTML · CSS · JavaScript</div>
+    <p>Nine small front-end builds — Counter, Dice Roller, Calculator, and more — each exploring a different core JavaScript pattern.</p>
+    <div class="links"><a href="https://github.com/nv24ceb0a40-lgtm/js-projects" target="_blank">View code</a></div>
+  </div>
+</section>
 
-    <div class="project">
-      <div class="project-top">
-        <h3>JS Mini-Projects</h3>
-        <div class="stack">HTML · CSS · JavaScript</div>
-      </div>
-      <p>Ten small front-end builds — Counter, Dice Roller, Calculator, Pokedex, and more — each exploring a different core JavaScript pattern.</p>
-      <div class="links"><a href="https://github.com/nv24ceb0a40-lgtm" target="_blank">View code</a></div>
-    </div>
-
-  </section>
-
-  <section class="skills">
-    <div class="section-head"><span class="idx">03</span><h2>Skills</h2></div>
+<section class="skills reveal">
+  <div class="inner">
+    <div class="section-head"><span class="idx">06</span><h2>Skills</h2><div class="rule"></div></div>
     <ul>
       <li>JavaScript</li>
       <li>React</li>
@@ -175,13 +275,23 @@
       <li>SQL</li>
       <li>C++ / DSA</li>
     </ul>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    <p>Let's connect — reach out via GitHub or LinkedIn above.</p>
-  </footer>
+<footer>
+  <p>Let's connect — reach out via GitHub or LinkedIn above.</p>
+</footer>
 
-</div>
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
